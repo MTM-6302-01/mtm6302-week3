@@ -64,9 +64,11 @@ function feedMonster(amount){
     energy = energy + amount
     if(energy > 100){
         energy = 100
+        console.log("Energy is already full.")
     }
     else if(energy < 0){
         energy = 0
+        console.log("Energy is already empty.")
     }
     
     updateMonster()
@@ -85,8 +87,51 @@ function updateMonster(){
         messageText.textContent = "Currently buffering. Please send snacks."
 
     }
+
+    else if(energy < 70){
+        monsterCard.classList.add("is-hungry")
+        monsterImage.setAttribute("src", "assets/hungry.svg")
+        monsterImage.setAttribute("alt", "a hungry green monster with mouth wide open")
+        messageText.textContent = "I smell cookies in another browser tab."
+    }
+
+    else{
+        monsterCard.classList.add("is-happy")
+        monsterImage.setAttribute("src", "assets/happy.svg")
+        monsterImage.setAttribute("alt", "a happy green monster with a big smile")
+        messageText.textContent = "Enough energy to create chaos on the internet."
+    }
 }
 
+function playMonster(amount){
+    energy -= amount
+    if(energy > 100){
+        energy = 100 
+        console.log("Energy is already full.")
+    }
+    else if(energy < 0){
+        energy = 0
+        console.log("Energy is already empty.")
+    }
+}
+
+function renameMonster(name){
+    monsterName.textContent = name
+    certificateName.textContent = name
+    document.title += " - " + name
+}
+
+function toggleParty(){
+    monsterCard.classList.toggle("party-mode")
+}
+
+function resetMonster(){
+    energy = 20 
+    renameMonster("Mochi")
+    monsterCard.classList.remove("party-mode")
+    updateMonster()
+}
+resetMonster()
 // 6. Put display updates in updateMonster(). Add feedMonster(amount).
 
 // 7. Extract getMood(energy), which returns a string.

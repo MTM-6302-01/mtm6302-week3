@@ -44,7 +44,7 @@ console.log(monsterCard.classList);
 certificate.removeAttribute("hidden");
 certificateName.textContent = monsterName.textContent; 
 // 5. Use an energy number and if / else if / else to choose a mood.
-let energy = 80
+let energy = 20
 
 energyText.textContent = energy;
 
@@ -68,7 +68,23 @@ function feedMonster(amount){
     else if(energy < 0){
         energy = 0
     }
+    
+    updateMonster()
+}
+function updateMonster(){
+    const mood = getMood(energy)
+    moodText.textContent = mood
     energyText.textContent = energy;
+
+    monsterCard.classList.remove("is-sleepy", "is-hungry", "is-happy")
+
+    if (energy < 30){
+        monsterCard.classList.add("is-sleepy")
+        monsterImage.setAttribute("src", "assets/sleepy.svg")
+        monsterImage.setAttribute("alt", "a sleepy green monster with eyes closed")
+        messageText.textContent = "Currently buffering. Please send snacks."
+
+    }
 }
 
 // 6. Put display updates in updateMonster(). Add feedMonster(amount).
